@@ -50,8 +50,9 @@ module.exports = function(options) {
 
 		csvjson.process(file.contents, options, function(err, sets) {
 			sets.forEach(function(set) {
-				
-				var mydata = new Buffer(JSON.stringify(set.data), 'utf8');
+
+				var outputString = JSON.stringify(set.data).replace(/\\\\n/g, '\\n');
+				var mydata = new Buffer(outputString, 'utf8');
                 var base = path.join(file.path, '..');
 
                 var jso = new gutil.File({

@@ -1,13 +1,17 @@
 {
 	"name": "gulp-csv-to-json",
 	"description": "convert csv to json",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"homepage": "https://github.com/airwave-development/gulp-csv-to-json",
-	"author": {
+	"author": [{
 		"name": "Olivier de Jong",
 		"email": "olivier@airwave.io",
 		"url": "https://airwave.io"
 	},
+	{
+		"name": "Avishai Gurt",
+		"email": "avishai@oviva.com"
+	}]
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/airwave-development/gulp-csv-to-json.git"
