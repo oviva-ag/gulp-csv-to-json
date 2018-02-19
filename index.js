@@ -31,6 +31,9 @@ module.exports = function(options) {
 
 	return through.obj(function(file, enc, cb) {
 
+		var self = this;
+
+
 		if (file.isNull()) {
 			return cb(null, file);
 		}
@@ -48,11 +51,19 @@ module.exports = function(options) {
 		csvjson.process(file.contents, options, function(err, sets) {
 			sets.forEach(function(set) {
 				
-				file.contents = new Buffer(JSON.stringify(set.data), 'utf8');
-				file.path = gutil.replaceExtension(file.path, '.json');
+				var mydata = new Buffer(JSON.stringify(set.data), 'utf8');
+                var base = path.join(file.path, '..');
 
-				cb(null, file);
+                var jso = new gutil.File({
+                    base: base,
+                    path: path.join(base, set.name+'.json'),
+                    contents: mydata
+                });
+                
+                self.push(jso);
 			});
+
+			cb();
 		});	
 	});
 };
