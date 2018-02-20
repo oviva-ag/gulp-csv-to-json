@@ -11,7 +11,7 @@
 	{
 		"name": "Avishai Gurt",
 		"email": "avishai@oviva.com"
-	}]
+	}],
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/airwave-development/gulp-csv-to-json.git"
