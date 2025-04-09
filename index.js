@@ -10,7 +10,7 @@ var csvjson = require('./lib/index');
 var extendOptions = function(optionsObject) {
 	var defaultOptions = {
 		parserOptions: {
-			auto_parse: true
+			cast: true
 		},
 		processValue: function(key, value) {
 			if (key !== '') {

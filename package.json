@@ -36,7 +36,7 @@
 		"vinyl": "^2.2.1",
 		"gulp-path": "3.0.3",
 		"through2": "2.0.1",
-		"csv-parse": "0.0.6"
+		"csv-parse": "^5.6.0"
 	},
 	"devDependencies": {
 
