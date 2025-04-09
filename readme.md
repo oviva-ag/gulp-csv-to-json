@@ -63,14 +63,14 @@ gulp.task('csvToJson', function () {
 
 ### Options
 
-#### options
+#### options.parserOptions
 Type: `Object`
 
 CSV parser options: see [node-csv-parse#parser-options](https://github.com/wdavidw/node-csv-parse#parser-options).
 
 ```js
-options = {
-	auto_parse : true
+options.parserOptions = {
+	cast: true
 };
 ```
 
@@ -81,10 +81,8 @@ Type: `Function`
 Hook to process field value.
 
 ```js
-options = {
-	processValue: function (key, value) {
-		return value;
-	}	
+options.processValue = function (key, value) {
+	return value;
 };
 ```
 

@@ -1,5 +1,8 @@
 var through = require('through2');
-var gutil = require('gulp-util');
+var PluginError = require('plugin-error');
+var log = require('fancy-log');
+var colors = require('ansi-colors');
+var Vinyl = require('vinyl');
 var path = require('path');
 
 var csvjson = require('./lib/index');
@@ -7,7 +10,7 @@ var csvjson = require('./lib/index');
 var extendOptions = function(optionsObject) {
 	var defaultOptions = {
 		parserOptions: {
-			auto_parse: true
+			cast: true
 		},
 		processValue: function(key, value) {
 			if (key !== '') {
@@ -39,11 +42,11 @@ module.exports = function(options) {
 		}
 
 		if (file.isStream()) {
-			return cb(new gutil.PluginError('gulp-csv2json', 'Streaming not supported'));
+			return cb(new PluginError('gulp-csv2json', 'Streaming not supported'));
 		}
 
 		if (['.csv'].indexOf(path.extname(file.path)) === -1) {
-			gutil.log('gulp-csv-to-json: Skipping unsupported csv ' + gutil.colors.blue(file.relative));
+			log('gulp-csv-to-json: Skipping unsupported csv ' + colors.blue(file.relative));
 			return cb(null, file);
 		}
 
@@ -52,10 +55,10 @@ module.exports = function(options) {
 			sets.forEach(function(set) {
 
 				var outputString = JSON.stringify(set.data).replace(/\\\\n/g, '\\n');
-				var mydata = new Buffer(outputString, 'utf8');
+				var mydata = Buffer.from(outputString, 'utf8');
                 var base = path.join(file.path, '..');
 
-                var jso = new gutil.File({
+                var jso = new Vinyl({
                     base: base,
                     path: path.join(base, set.name+'.json'),
                     contents: mydata
